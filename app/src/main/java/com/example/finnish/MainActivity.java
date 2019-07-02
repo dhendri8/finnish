@@ -1,5 +1,6 @@
 package com.example.finnish;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,9 +12,12 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button click1, click2, click3;
+    MediaPlayer mdx;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        click1 = (Button)findViewById(R.id.playid);
+        click2 = (Button)findViewById(R.id.pauseid);
+        click3 = (Button)findViewById(R.id.stopid);
+        mdx    = MediaPlayer.create(MainActivity.this, R.raw.finnish);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,6 +38,20 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void clickPlay(View v){
+        mdx.start();
+    }
+
+    public void clickPause(View v){
+        mdx.pause();
+    }
+
+    public void clickStop(View v){
+        mdx.stop();
+        mdx = MediaPlayer.create(MainActivity.this, R.raw.finnish);
+
     }
 
     @Override
